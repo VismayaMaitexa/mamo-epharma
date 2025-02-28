@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .page-header h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .alert-success {
+            background-color: #27ae60;
+            color: white;
+            border-radius: 4px;
+            font-size: 1.5em;
+        }
+        .btn-success, .btn-feedback {
+            border-radius: 4px;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
+        }
+        .btn-success:hover {
+            background-color: #2ecc71;
+        }
+        .btn-feedback {
+            background-color: #3498db;
+            color: white;
+        }
+        .btn-feedback:hover {
+            background-color: #5dade2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header text-center">
+        <h1>Payment Successful</h1>
+    </div>
+
+    <div class="alert alert-success text-center">
+        <strong>Thank you!</strong> Your payment has been successfully processed.
+    </div>
+
+    <div class="text-center">
+        <p>Your transaction has been completed, and a receipt has been sent to your email.</p>
+        <a href="/" class="btn btn-success">Return to Homepage</a>
+        <a href="{% url 'user-feedback' %}" class="btn btn-feedback">Give Feedback</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Customer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <h1>Add New User</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <h3>User Information</h3>
+            {{ userForm.as_p }}
+        </div>
+        <div>
+            <h3>Customer Information</h3>
+            {{ customerForm.as_p }}
+        </div>
+        <button type="submit">Add User</button>
+    </form>
+        <a href="{% url 'view-customer' %}" class="back-button">Back to Customer List</a>
+    </div>
+</body>
+</html>

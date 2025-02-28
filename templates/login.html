@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+           
+            background-color: #0e6564;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: rgb(90, 130, 128);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #49032a;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #0b4b4f;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #00789c;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #e550b877;
+            outline: none;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #00698d;
+            color: rgb(255, 241, 93);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #1d6579;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #094f6d;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="POST" action="">
+            <!-- CSRF Token -->
+            {% csrf_token %} 
+            <input type="hidden" name="csrf_token" value="your_csrf_token_here">
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-button">Log In</button>
+            <a href="{% url 'forgot_password' %}" class="forgot-password">Forgot Password?</a>
+        </form>
+    </div>
+</body>
+</html>

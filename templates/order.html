@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Online Pharmacy</title>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f4f4f4;
+            background-image: url('../static/images/back.jpg');
+        }
+
+        .sidebar {
+            width: 210px;
+            background: #252d5cf4;
+            color: #ecf0f1;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+            color: #ecf0f1;
+        }
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background 0.3s, padding-left 0.3s;
+        }
+        .sidebar a:hover {
+            background: #34495e;
+            padding-left: 20px;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        .main {
+            margin-left: 260px;
+            padding: 20px;
+            flex-grow: 1;
+            transition: margin-left 0.3s;
+            
+        }
+        .header {
+            background: #224b65;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+        .content {
+            margin-top: 20px;
+            
+        }
+        .card {
+            background: rgb(168, 79, 79);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #2c3e50;
+        }
+        .card p {
+            color: #7f8c8d;
+        }
+        .order-details, .payment-details {
+            margin-top: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: rgb(239, 236, 236);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #0e0101;
+        }
+        th {
+            background-color: #121461;
+            color: white;
+            font-size: 16px;
+        }
+        td {
+            font-size: 14px;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            color: #3889e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 150px;
+            }
+            .main {
+                margin-left: 210px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Pharmacy Admin</h2>
+    <a href="{% url 'products' %}"><i class="fas fa-pills"></i> Products</a>
+    <a href="{% url 'orders' %}"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="{% url 'user' %}"><i class="fas fa-users"></i> Users</a>
+    <a href="{% url 'feeds' %}"><i class="fas fa-chart-line"></i> Feedback</a>
+    <a href="{% url 'admin_online' %}"><i class="fas fa-cogs"></i> Online boy</a>
+    <a href="{% url 'front' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>Order Details</h1>
+    </div>
+        <table>
+            <tr>
+                <th>Customer</th>
+                <th>Order ID</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Products</th>
+                <th>User</th>
+                
+            </tr>
+            
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.full_name }}</td>
+                <td>{{ order.tracking_number  }}</td>
+                <td>{{ order.shipping_address }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.products.name}}</td>
+                <td>{{ order.user}}</td>
+                
+                    
+                
+            </tr>
+            {% endfor %}
+        </table>
+    
+    </div>
+</div>
+
+</body>
+</html>

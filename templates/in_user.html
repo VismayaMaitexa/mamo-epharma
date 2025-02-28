@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Online Pharmacy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f4f4f4;
+            background-image: url('../static/images/users.jpg');
+        }
+        .sidebar {
+            width: 210px;
+            background: #721f04;
+            color: #ecf0f1;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 5px rgba(58, 45, 45, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background 0.3s, padding-left 0.3s;
+        }
+        .sidebar a:hover {
+            background: #c784c4;
+            padding-left: 20px;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        .main {
+            margin-left: 260px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .header {
+            background: #6d2f08;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(3, 3, 3, 0.1);
+        }
+        .content {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .container {
+            flex: 1;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .users {
+            background: #da8351; 
+        }
+        .orders {
+            background: #dea850; 
+        }
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px;
+            background: #5cb85c;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #4cae4c;
+        }
+        .order-list, .payment-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .order-item, .payment-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Pharmacy Admin</h2>
+    <a href="{% url 'products' %}"><i class="fas fa-pills"></i> Products</a>
+    <a href="{% url 'orders' %}"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="{% url 'user' %}"><i class="fas fa-users"></i> Users</a>
+    <a href="{% url 'feeds' %}"><i class="fas fa-chart-line"></i> Feedback</a>
+    <a href="{% url 'admin_online' %}"><i class="fas fa-cogs"></i> Online boy</a>
+    <a href="{% url 'front' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>User Dashboard</h1>
+    </div>
+
+    <div class="content">
+        <div class="container users">
+            <a href="{% url 'add-inuser' %}" style="text-decoration: none; color: inherit;">
+                <h2>Adding User  <i class="fas fa-user-plus"></i></h2>
+                <p>Click here to add a new user</p>
+                
+            </a>
+        </div>
+    
+        <div class="container orders">
+            <a href="{% url 'view-customer' %}" style="text-decoration: none; color: inherit;">
+                <h2>Views<i class="fas fa-eye"> </i></h2>
+                
+                <p>Click here to view users</p>
+                
+            </a>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

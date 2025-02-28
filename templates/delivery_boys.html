@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Boys Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #088e50a8;
+        
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .sidebar {
+            width: 210px;
+            background: #26c064f4;
+            color: #ecf0f1;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+            color: #ecf0f1;
+        }
+        
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background 0.3s, padding-left 0.3s;
+        }
+        
+        .sidebar a:hover {
+            background: #34495e;
+            padding-left: 20px;
+        }
+        
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        
+
+        .main {
+            margin-left: 260px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .header {
+            background: #3f890b;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(3, 3, 3, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: rgb(18, 3, 72);
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #100202;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #11873e;
+            color: white;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            margin: 5px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .approve {
+            background-color: rgb(4, 93, 4);
+        }
+
+        .reject {
+            background-color: red;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 180px;
+            }
+
+            .main {
+                margin-left: 200px;
+                padding: 10px;
+            }
+
+            table, th, td {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 150px;
+            }
+
+            .main {
+                margin-left: 170px;
+                padding: 10px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Pharmacy Admin</h2>
+        <a href="{% url 'products' %}"><i class="fas fa-pills"></i> Products</a>
+        <a href="{% url 'orders' %}"><i class="fas fa-shopping-cart"></i> Orders</a>
+        <a href="{% url 'user' %}"><i class="fas fa-users"></i> Users</a>
+        <a href="{% url 'feeds' %}"><i class="fas fa-chart-line"></i> Feedback</a>
+        <a href="{% url 'admin_online' %}"><i class="fas fa-cogs"></i> Online boy</a>
+        <a href="{% url 'front' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Page Content -->
+    <div class="main">
+        <div class="header">
+            <h1>Delivery Boys Management</h1>
+        </div>
+
+        <!-- Table of Delivery Boys -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Profile</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Mobile</th>
+                    <th>Vehicle</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for boy in delivery_boys %}
+                <tr>
+                    <td>
+                        {% if boy.profile_pic %}
+                        <img src="{{ boy.profile_pic.url }}" alt="Profile Picture">
+                        {% else %}
+                        <img src="https://via.placeholder.com/50" alt="Profile Picture">
+                        {% endif %}
+                    </td>
+                    <td>{{ boy.user.username }}</td>
+                    <td>{{ boy.address }}</td>
+                    <td>{{ boy.mobile }}</td>
+                    <td>{{ boy.vechile }}</td>
+                    <td>
+                        {% if boy.approved %}
+                            <span style="color: green;">Approved</span>
+                        {% else %}
+                            <span style="color: orange;">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not boy.approved %}
+                            <a href="{% url 'approve_delivery_boy' boy.id %}" class="btn approve">Approve</a>
+                            <a href="{% url 'reject_delivery_boy' boy.id %}" class="btn reject">Reject</a>
+                        {% else %}
+                            <span>Action Disabled</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

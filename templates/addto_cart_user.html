@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+      
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            text-align: center;
+            background-color: #420731;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+
+       
+        .cart-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            table-layout: fixed; 
+        }
+
+        .cart-table th, .cart-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            white-space: nowrap; 
+        }
+
+        .cart-table th {
+            background-color: #3d051b;
+            color: white;
+        }
+
+        .cart-table td button {
+            background-color: #b636a1;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .cart-table td button:hover {
+            background-color: #420731;
+        }
+
+        
+        .total-section {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 18px;
+        }
+
+     
+        @media screen and (max-width: 768px) {
+            .content {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+                padding: 15px;
+            }
+
+            .cart-table th, .cart-table td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .cart-table td button {
+                padding: 5px 8px;
+            }
+
+            .total-section {
+                font-size: 16px;
+            }
+        }
+
+        
+        @media screen and (max-width: 480px) {
+            .cart-table th, .cart-table td {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .cart-table td button {
+                padding: 4px 6px;
+            }
+
+            h1 {
+                font-size: 20px;
+                padding: 10px;
+            }
+
+            .total-section {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <script>
+      
+        function updateTotal(productPrice, quantityInput, productId) {
+            const totalCell = quantityInput.closest('tr').querySelector('.total-price');
+            const quantity = parseInt(quantityInput.value) || 0;
+            const total = productPrice * quantity;
+            totalCell.textContent = `${total.toFixed(2)}`;
+            updateCartTotal();  
+            // Store the updated quantity in cookies
+            document.cookie = `quantity_${productId}=${quantity}; path=/`;
+        }
+
+       
+        function updateCartTotal() {
+            const totalCells = document.querySelectorAll('.total-price');
+            let grandTotal = 0;
+            totalCells.forEach(cell => {
+                const price = parseFloat(cell.textContent.replace('$', '')) || 0;
+                grandTotal += price;
+            });
+           
+            document.getElementById('grand-total').textContent = `Total Price: ${grandTotal.toFixed(2)}`;
+        }
+
+       
+        window.onload = function() {
+            updateCartTotal();
+        };
+    </script>
+</head>
+<body>
+
+    <!-- Main content -->
+    <div class="content">
+        <h1>Your Shopping Cart</h1>
+
+        <!-- Cart Table -->
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if products %}
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>
+                            <input type="number" value="1" min="1" onchange="updateTotal({{ product.price }},this,{{ product.id }})">
+                        </td>
+                        <td class="total-price">{{ product.price }}</td>
+                        <td>
+                            <!-- Button to remove product from the cart -->
+                            <form method="POST" action="{% url 'item-delete' product.id %}">
+                                {% csrf_token %}
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5">Your cart is empty.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <!-- Total Price Section -->
+        {% if products %}
+        <div class="total-section">
+            <h3 id="grand-total">Total Price: {{ total }}</h3>
+            <form method="POST" action="{% url 'proceed button' %}">
+                {% csrf_token %}
+                <button type="submit">Proceed to Checkout</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

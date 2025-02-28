@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: hsl(58, 28%, 44%);
+    background-image: url("../static/images/delivery.jpg");
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.welcome-bar {
+    background-color: #ffffff; 
+    border: 1px solid #ccc;    
+    border-radius: 10px;      
+    padding: 20px;             
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+h1 {
+    color: #333;
+    margin: 0;
+}
+
+p {
+    color: #666;
+    margin: 10px 0 0;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    margin: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.register {
+    background-color: #28a745; 
+}
+
+.login {
+    background-color: #007BFF; 
+}
+
+.button:hover {
+    transform: translateY(-3px);
+}
+
+.register:hover {
+    background-color: #218838; 
+}
+
+.login:hover {
+    background-color: #0056b3; 
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Online Pharmacy</title>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-bar">
+            <h1>Welcome</h1>
+            
+        
+        <div class="button-container">
+            <centre>
+            <a href="{% url 'online_registers' %}" class="button register">Register</a>
+            <a href="{% url 'login__online' %}" class="button login">Login</a>
+            </centre>
+        </div></div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Online Pharmacy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f4f4f4;
+            background-image: url("../static/images/admin.jpg");
+            justify-content: center; 
+            align-items: center;
+            height: 100vh; 
+        }
+        .sidebar {
+            width: 250px; 
+            background: #1f2e3c;
+            color: #ecf0f1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center the content vertically */
+            align-items: center; /* Center the content horizontally */
+            height: 80vh; /* Sidebar height */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+            color: #ecf0f1;
+        }
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background 0.3s, padding-left 0.3s;
+            width: 100%; /* Ensure links take up the full width of the sidebar */
+        }
+        .sidebar a:hover {
+            background: #4a35af;
+            padding-left: 20px;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Pharmacy Admin</h2>
+    <a href="{% url 'products' %}"><i class="fas fa-pills"></i> Products</a>
+    <a href="{% url 'orders' %}"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="{% url 'user' %}"><i class="fas fa-users"></i> Users</a>
+    <a href="{% url 'feeds' %}"><i class="fas fa-chart-line"></i> Feedback</a>
+    <a href="{% url 'admin_online' %}"><i class="fas fa-cogs"></i> Online boy</a>
+    <a href="{% url 'front' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+</body>
+</html>

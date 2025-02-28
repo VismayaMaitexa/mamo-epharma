@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #36b783, #78024a);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #c722af;
+            color: white;
+            padding-top: 20px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            border-right: 2px solid #fff;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #fff;
+        }
+
+        .sidebar ul li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: background 0.3s ease;
+            padding: 10px;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #840370;
+            border-radius: 5px;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #56014a;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1100;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: #15b0d6;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 30px;
+            max-width: 1000px;
+            background-color: white;
+            border-radius: 10px;
+            margin-top: 70px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: margin-left 0.3s ease;
+        }
+
+        .container.sidebar-active {
+            margin-left: 250px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: #cb12b5;
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #780a6f;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #1ec7c1;
+            padding-bottom: 5px;
+        }
+
+        section p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        section p strong {
+            color: #333;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #36d9c6;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #670249;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f1f1f1;
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+        }
+
+        footer p {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{% url 'user_dashh' %}">Home</a></li>
+            <li><a href="{% url 'viewing_cart' %}">Cart</a></li>
+            <li><a href="{% url 'purchase' %}">Products</a></li>
+            <li><a href="{% url 'user-order' %}">Order History</a></li>
+            <li><a href="{% url 'front' %}">Logout</a></li>
+        </ul>
+    </div>
+
+    <button class="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+    <div class="container" id="main-container">
+        <header>
+            <h1>Welcome, {{ user.first_name }} {{ user.last_name }}!</h1>
+        </header>
+
+        <section class="user-info">
+            <h2>User Information</h2>
+            <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.customer.address }}</p>
+            <p><strong>Phone:</strong> {{ user.customer.mobile }}</p>
+        </section>
+
+        <section class="order-history">
+            <h2>Order History</h2>
+            <button onclick="window.location.href='{% url 'user-order' %}'">View All Orders</button>
+        </section>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContainer = document.getElementById('main-container');
+            sidebar.classList.toggle('active');
+            mainContainer.classList.toggle('sidebar-active');
+        }
+    </script>
+</body>
+</html>

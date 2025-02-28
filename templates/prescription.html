@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Text Extraction</title>
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            margin: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 30px auto;
+            max-width: 1200px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-size: 16px;
+        }
+        td {
+            font-size: 14px;
+        }
+        .product-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+        .card .content {
+            padding: 15px;
+            text-align: center;
+        }
+        .card .name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .card .description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .card .price {
+            font-size: 16px;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        .card .cart-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #2980b9;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .card .cart-btn:hover {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Text Extraction</h1>
+    <div class="container">
+        <form action="/prescription" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit" class="btn">Extract Text</button>
+        </form>
+
+        {% if extracted_text %}
+        <h2>Extracted Text:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Text Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in extracted_text %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ item }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Matching Products:</h2>
+        <div class="product-card">
+            {% for p in products %}
+                {% for item in extracted_text %}
+                    {% if p.name in item %}
+                    <div class="card">
+                        <img src="{% static p.profile.name %}" alt="product pic">
+                        <div class="content">
+                            <div class="name">{{ p.name }}</div>
+                            <div class="description">{{ p.description }}</div>
+                            <div class="price">{{ p.price }}</div>
+                            <a href="{% url 'add-to-cart' p.id %}" class="cart-btn">Add to Cart</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

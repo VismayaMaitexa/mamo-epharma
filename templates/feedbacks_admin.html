@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - User Feedback</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f4f4f4;
+            background-image: url("../static/images/bg.jpg");
+        }
+       
+        .moving-text {
+            background: #470d34;
+            color: white;
+            padding: 10px;
+            position: absolute;
+            top: 10px;
+            white-space: nowrap;
+            animation: move 10s linear infinite;
+        }
+        @keyframes move {
+            from { left: 100%; }
+            to { left: -70%; }
+        }
+        
+        .sidebar {
+            width: 230px;
+            background: #830651f4;
+            color: #ecf0f1;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+            color: #ecf0f1;
+        }
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background 0.3s, padding-left 0.3s;
+        }
+        .sidebar a:hover {
+            background: #34495e;
+            padding-left: 20px;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        .main {
+            margin-left: 260px;
+            padding: 20px;
+            flex-grow: 1;
+            transition: margin-left 0.3s;
+        }
+        .header {
+            background: #7a1d4a;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .feedback-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .feedback-card h5 {
+            margin: 0;
+            color: #007bff;
+        }
+        .feedback-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .btn-respond {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-respond:hover {
+            background-color: #0056b3;
+        }
+        .no-feedback {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Pharmacy Admin</h2>
+    <a href="{%url 'products' %}"><i class="fas fa-pills"></i> Products</a>
+    <a href="{% url 'orders' %}"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="{% url 'user' %}"><i class="fas fa-users"></i> Users</a>
+    <a href="{% url 'feeds' %}"><i class="fas fa-chart-line"></i> Feedback</a>
+    <a href="{% url 'admin_online' %}"><i class="fas fa-cogs"></i> Online boy</a>
+    <a href="{% url 'front' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1> Feedback Dashboard</h1>
+    </div>
+    <div class="content">
+        <!-- Feedback Content -->
+        {% for feedback in feedbacks %}
+        <div class="feedback-card">
+            <h5>{{ feedback.name }}</h5>
+            <p><strong>Email:</strong> {{ feedback.email }}</p>
+            <p><strong>Feedback:</strong> {{ feedback.feedback }}</p>
+            <p><small><strong>Submitted At:</strong> {{ feedback.created_at }}</small></p>
+            
+        </div>
+        {% empty %}
+        <p class="no-feedback">No feedback available</p>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

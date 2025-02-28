@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #cc7bea;
+            background-position:cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size:290px,350px ;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: rgb(166, 97, 187);
+            padding: 30px;
+            border-radius: 70px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            height: 630px;
+            width: 350px;
+            
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #660e60;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #360087;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #053a72;
+            outline: none;
+        }
+        button {
+            background-color: #74039a;
+            color: rgba(243, 137, 137, 0.623);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #134169;
+        }
+        .footer {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #6b13e6;
+        }
+        .footer a {
+            color: #1b284b;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <form class="box" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <h1>DELIVERY SIGNUP</h1>
+            <p class="text-muted">Please enter your details to create an account!</p>
+            {% render_field userForm.first_name class="form_contrl" placeholder="First Name" %}
+                {% render_field userForm.last_name class="form_contrl" placeholder="Last Name" %}
+                    {% render_field userForm.username class="form_contrl" placeholder=" Username" %}
+                        {% render_field userForm.password class="form_contrl" placeholder="Password" %}
+                            {% render_field deliveryForm.address class="form_contrl" placeholder="Address" %}
+                               {% render_field deliveryForm.mobile class="form_contrl" placeholder="Mobile" %}
+                                    {% render_field deliveryForm.profile_pic class="form_contrl" placeholder="Profile Pic" %}
+                                       {% render_field deliveryForm.vechile class="form_contrl" placeholder="Vechile No" %} 
+            <button type="submit">Register</button>
+        </form>
+        <div class="footer">
+            Already have an account? <a href="{% url 'login__online' %}">Login here</a>
+        </div>
+    </div>
+</body>
+</html>

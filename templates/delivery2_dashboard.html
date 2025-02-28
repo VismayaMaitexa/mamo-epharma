@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Boy Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #545e05;
+        }
+        .container {
+            width: 60%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .profile-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .profile-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .profile-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .order-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .order-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .order-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .order-card select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .order-card button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .order-card button:hover {
+            background-color: #0056b3;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .logout button:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Delivery Boy Dashboard</h1>
+
+        <!-- Display the Delivery Boy's Profile Information -->
+        <div class="profile-card">
+            <h3>Delivery Boy Profile</h3>
+            <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+        </div>
+
+        <!-- Loop through orders and display each one -->
+        {% for order in orders %}
+        <div class="order-card">
+            <h3>Order Details</h3>
+            <p><strong>Full Name:</strong> {{ order.full_name }}</p>
+            <p><strong>Email:</strong> {{ order.email }}</p>
+            <p><strong>Shipping Address:</strong> {{ order.shipping_address }}</p>
+            <p><strong>Phone Number:</strong> {{ order.phone_number }}</p>
+            <p><strong>Tracking Number:</strong> {{ order.tracking_number }}</p>
+            <p><strong>Order Status:</strong> {{ order.get_status_display }}</p>
+
+            <!-- Display Ordered Products -->
+            <h4>Ordered Products:</h4>
+            <ul>
+                {% for product in order.products.all %}
+                <li>{{ product.name }} (Price per: {{ product.price }})</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Form to update the order status -->
+            <form method="post" action="{% url 'update_order_status' order.id %}">
+                {% csrf_token %}
+                <select name="status">
+                    <option value="PENDING" {% if order.status == 'PENDING' %}selected{% endif %}>Pending</option>
+                    <option value="SHIPPED" {% if order.status == 'SHIPPED' %}selected{% endif %}>Shipped</option>
+                    <option value="DELIVERED" {% if order.status == 'DELIVERED' %}selected{% endif %}>Delivered</option>
+                    <option value="CANCELLED" {% if order.status == 'CANCELLED' %}selected{% endif %}>Cancelled</option>
+                </select>
+                <button type="submit">Update Status</button>
+            </form>
+        </div>
+        {% endfor %}
+
+        <!-- Log out button -->
+        <div class="logout">
+            <form method="post" action="{% url 'front' %}">
+                {% csrf_token %}
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

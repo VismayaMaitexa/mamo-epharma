@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            background-image: url("../static/images/v870-tang-36.jpg");
+            background-size:cover;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: rgb(241, 131, 131);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 300px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #33071f;
+        }
+        .button {
+            display: inline-block;
+            background: #33071f;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-size: 16px;
+            margin: 10px 0;
+            width: 48%;
+           
+        }
+        .button:hover {
+            background: #c784c4;
+            transform: translateY(-2px);
+        }
+        .button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome</h2>
+    <p>Your health is our priority. Please register or login to continue.</p>
+    <a href="{% url 'registers' %}" class="button">Register</a>
+    <a href="{% url 'userlogin' %}" class="button">Login</a>
+</div>
+
+</body>
+</html>
+

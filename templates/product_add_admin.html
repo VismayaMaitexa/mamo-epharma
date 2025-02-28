@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #7acddb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            padding: 40px;
+            background-color: rgba(137, 209, 219, 0.626);
+            border-radius: 12px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            transition: all 0.3s ease;
+        }
+
+        
+        h2 {
+            color: #003366;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            font-size: 1.1rem;
+            color: #6d1212;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #4e79e6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #606add;
+        }
+
+       
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Add Product</h2>
+        
+        <!-- Product Form -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Product Name</label>
+                {{ form.name }}
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                {{ form.price }}
+            </div>
+            
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group">
+                <label for="id_quantity">Quantity (kg)</label>
+                <div style="display: flex; align-items: center;">
+                    {{ form.quantity }}
+                    <span style="margin-left: 10px; font-size: 1rem; color: #555;">kg</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="profile">Product Image</label>
+                {{ form.profile }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Product</button>
+        </form>
+    </div>
+</body>
+</html>

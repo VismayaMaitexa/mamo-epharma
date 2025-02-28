@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Payment Gateway</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .page-header h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .panel {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .panel-heading {
+            text-align: center;
+            padding: 20px;
+            background-color: #27ae60;
+            color: #fff;
+            border-radius: 8px 8px 0 0;
+        }
+        .panel-body {
+            padding: 20px;
+            background-color: #fff;
+        }
+        .panel-footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 0 0 8px 8px;
+        }
+        .form-control {
+            border-radius: 4px;
+        }
+        .input-group-addon {
+            background-color: #f1f1f1;
+        }
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
+            border-radius: 4px;
+            font-size: 1.2em;
+        }
+        .btn-success:hover {
+            background-color: #2ecc71;
+        }
+        .inlineimage img {
+            margin: 0 10px;
+            width: 50px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header text-center">
+        <h1>Credit Card Payment Gateway</h1>
+    </div>
+
+    <!-- Credit Card Payment Form - START -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Payment Details</h3>
+            <div class="inlineimage">
+                <img class="img-responsive" src="https://cdn0.iconfinder.com/data/icons/credit-card-debit-card-payment-PNG/128/Mastercard-Curved.png" alt="Mastercard">
+                <img class="img-responsive" src="https://cdn0.iconfinder.com/data/icons/credit-card-debit-card-payment-PNG/128/Discover-Curved.png" alt="Discover">
+                <img class="img-responsive" src="https://cdn0.iconfinder.com/data/icons/credit-card-debit-card-payment-PNG/128/Paypal-Curved.png" alt="PayPal">
+                <img class="img-responsive" src="https://cdn0.iconfinder.com/data/icons/credit-card-debit-card-payment-PNG/128/American-Express-Curved.png" alt="American Express">
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_card_number">CARD NUMBER</label>
+                            {{ form.card_number }}
+                            {% if form.card_number.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.card_number.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-7 col-md-7">
+                        <div class="form-group">
+                            <label for="id_expiration_date">EXPIRATION DATE</label>
+                            {{ form.expiration_date }}
+                            {% if form.expiration_date.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.expiration_date.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5 col-md-5">
+                        <div class="form-group">
+                            <label for="id_cv_code">CV CODE</label>
+                            {{ form.cv_code }}
+                            {% if form.cv_code.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.cv_code.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="id_card_owner">CARD OWNER</label>
+                            {{ form.card_owner }}
+                            {% if form.card_owner.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.card_owner.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Confirm Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- For Font Awesome icons -->
+</body>
+</html>

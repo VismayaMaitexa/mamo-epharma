@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            background-image:url("../static/images/phone.jpg") ;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 550px;
+            margin:auto;
+            background: #8ec9f8;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        .contact-details {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .contact-details h2 {
+            color: #007bff;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .contact-details p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        .contact-details a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-details a:hover {
+            color: #0056b3;
+        }
+        .alert {
+            display: none;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 30px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .contact-details h2 {
+                font-size: 1.6rem;
+            }
+            form button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        
+        <!-- Contact Details Section -->
+        <div class="contact-details" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Our Contact Details</h2>
+            <p><strong>Email:</strong> <a href="mailto:support@example.com">pharma@hub.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+12345678901">+1 (234) 567-8901</a></p>
+            <p><strong>Address:</strong> 123 Example St, City, Country</p>
+        </div>
+        
+        <!-- Alert Message -->
+        <div class="alert" id="alertMessage" role="alert">Your feedback has been sent!</div>
+        
+        <!-- Contact Form Section -->
+        
+    </div>
+
+
+</body>
+</html>

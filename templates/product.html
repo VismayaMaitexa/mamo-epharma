@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dashboard - Online Pharmacy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f4f4f4;
+            background-image: url("../static/images/products.jpg");
+            overflow-x: hidden; /* To prevent horizontal scroll */
+        }
+        .sidebar {
+            width: 210px;
+            background: #964ed0ed;
+            color: #ecf0f1;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: normal;
+            color: #ecf0f1;
+        }
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background 0.3s, padding-left 0.3s;
+        }
+        .sidebar a:hover {
+            background: #34495e;
+            padding-left: 20px;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        .main {
+            margin-left: 260px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .header {
+            background: #870a97;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(3, 3, 3, 0.1);
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .card-link {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            width: 200px;
+            text-decoration: none;
+            color: #870a97;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-link:hover {
+            transform: translateY(-10px);
+            background: #f9f9f9;
+        }
+
+        .card-link i {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .card-link h3 {
+            font-size: 18px;
+        }
+
+        /* CSS for moving text */
+        .moving-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70%;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e1e1e;
+            background-color: #781a79e2; 
+            padding: 10px 0;
+            text-align: center;
+            white-space: nowrap;
+            animation: moveText 10s linear infinite;
+            z-index: 10; 
+        }
+
+        @keyframes moveText {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .link-cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Pharmacy Admin</h2>
+    <a href="{% url 'products' %}"><i class="fas fa-pills"></i> Products</a>
+    <a href="{% url 'orders' %}"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="{% url 'user' %}"><i class="fas fa-users"></i> Users</a>
+    <a href="{% url 'feeds' %}"><i class="fas fa-chart-line"></i> Feedback</a>
+    <a href="{% url 'admin_online' %}"><i class="fas fa-cogs"></i> Online boy</a>
+    <a href="{% url 'front' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>Products Dashboard</h1>
+    </div>
+
+    <div class="content">
+        
+        <div class="moving-text">
+            📈 Market Update: New Stock Available for Aspirin, Discounts on Pain Relievers!
+        </div>
+        <div class="link-cards">
+            <a href="{% url 'adds-product' %}" class="card-link">
+                <i class="fas fa-plus-circle"></i>
+                <h3>Add New Product</h3>
+            </a>
+            <a href="{% url 'product-views' %}" class="card-link">
+                <i class="fas fa-eye"></i>
+                <h3>View Product</h3>
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
